@@ -69,3 +69,30 @@ ENTRYPOINT ["/app/binary-or-server"]
 3. **Post-flight**:
    - Monitor de salud durante 120 segundos en `/health`.
    - Si se detecta status 5xx o fallos en health check, gatillar `rollback` de inmediato.
+
+
+---
+
+## 📝 Persistencia y Salida Activa (`overview/work/skill/`)
+
+Al ejecutar esta skill (mediante `$infra` o `$infra:audit`), es **obligatorio crear o actualizar su reporte activo** dentro del proyecto cliente en la ruta:
+
+`overview/work/skill/infra.md`
+
+### Estructura Requerida del Reporte:
+
+```markdown
+# 📋 Registro Activo de Tareas — Infra Agent Skill
+
+> **Generado por**: `infra-agent-skill` (`$infra:audit`)  
+> **Última actualización**: YYYY-MM-DD  
+
+## 🎯 Tareas Pendientes Accionables
+
+| ID | Tipo | Estado | Resumen | Evidencia/Ruta | Acción Requerida |
+|---|---|---|---|---|---|
+| INF-01 | Fix / Refactor | Pendiente | <Resumen breve> | `<ruta:línea>` | <Remediación recomendada> |
+
+## 📝 Observaciones y Detalles de Revisión
+- Detalle técnico, evidencia o contexto extendido proporcionado por la revisión de la skill.
+```
