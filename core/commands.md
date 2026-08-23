@@ -1,8 +1,9 @@
-# ⚡ Comandos de Infraestructura ($infra)
+# ⚡ hBcComandos de Infrastructure & DevOps Agent Skill ()
 
-- `$infra`: Bootstrap de habilidades de infraestructura.
-- `$infra:check`: Diagnóstico y auditoría completa de Docker, CI/CD e IaC.
-- `$infra:docker [target]`: Generación/optimización de Dockerfiles multi-stage.
-- `$infra:cicd [provider]`: Generación de pipelines de CI/CD (github/gitlab).
-- `$infra:iac [cloud]`: Generación de plantillas Terraform o Ansible.
-- `$infra:deploy [env]`: Checklist y automatización del plan de despliegue.
+| Comando | Acción | Descripción |
+|---|---|---|
+|  | Bootstrap | Bootstrap de habilidades de infraestructura. |
+|  | Diagnóstico | Diagnóstico y auditoría completa de Docker, CI/CD e IaC. |
+|  | Docker | Generación/optimización de Dockerfiles multi-stage. |
+|  | Aprendizaje | Registrar propuesta de mejora específica para  en  |
+|  | Revisión | Clasificar e inspeccionar propuestas de aprendizaje acumuladas en  |
