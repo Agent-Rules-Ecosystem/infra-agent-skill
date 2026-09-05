@@ -16,8 +16,10 @@ Al detectar `$infra` o tareas relacionadas con Docker, CI/CD, Terraform, Kuberne
 
 ## Regla Canónica Agnóstica
 
-Esta habilidad opera en cualquier lenguaje o plataforma (**Flutter, Node/TypeScript, Python, Go, Rust, C++, C# Game Engine**):
-- **Cero acoplamiento rígido**: Usar abstracciones genéricas de containerización y despliegue.
-- **Eficiencia de Capas Docker**: Siempre separar dependencias de código fuente para maximizar el uso de caché.
-- **Rollback preventivo**: Ningún pipeline o despliegue es válido sin verificación explícita del endpoint `/health` post-deploy.
-- **Economía de Tokens**: Generar manifiestos limpios sin comentarios redundantes ni bloques vacíos.
+Esta habilidad opera transversalmente sobre cualquier lenguaje o plataforma (**Flutter, Node/TypeScript, Python, Go, Rust, C++, C# Game Engine**):
+- **Aislamiento de Frontera Transversal (Domain Shield)**: La habilidad orquesta pipelines, empaquetado, secretos, optimización de release e IaC. **NUNCA** audita ni acopla lógica de UI, insets/lifecycles de SO, layouts ni reglas de negocio. Esas validaciones pertenecen exclusivamente a las habilidades de plataforma/aplicación.
+- **Cero Acoplamiento Rígido**: Usar abstracciones genéricas de compilación, containerización y distribución sin sesgos monomodales.
+- **Contrato de Compuertas de Calidad (Quality Gates)**: Todo pipeline debe consumir hooks estándar provistos por la aplicación (`pre-flight:lint`, `pre-flight:test`, `pre-flight:security`) antes de empaquetar. Si una compuerta falla, el pipeline aborta.
+- **Release Hardening & Optimización Obligatoria**: Bloquear la distribución a producción si las banderas de optimización de release (minificación, dead code elimination, tree-shaking, stripping) están desactivadas, garantizando además la extracción y archivo de símbolos de depuración/mapeo para observabilidad.
+- **Verificación de Salud Agnóstica al Arquetipo**: Ningún despliegue se considera exitoso sin validación post-release adaptada a su naturaleza (HTTP `/health` para servicios, telemetría/crash rate y staged rollout para clientes/mobile, smoke test para CLIs/binarios).
+- **Economía de Tokens**: Manifiestos precisos y modulares, sin comentarios redundantes ni bloques vacíos.

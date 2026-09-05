@@ -1,20 +1,32 @@
 # 🏗️ Infra Agent Skill (Transversal)
 
-> **Habilidad Transversal de Infraestructura, CI/CD, Containerización y Despliegue Agnóstico** para Agentes de Inteligencia Artificial (Antigravity, Cursor, Claude, OpenAI, Gemini).
+> **Habilidad Transversal de Infraestructura, CI/CD, Release Engineering, Containerización y Despliegue Agnóstico** para Agentes de Inteligencia Artificial (Antigravity, Cursor, Claude, OpenAI, Gemini).
 
-Designed to be **100% agnostic** across all application types (**Flutter, Web, Game, Backend**).
+Diseñada bajo el principio de **100% agnosticismo transversal** para operar sobre cualquier plataforma (**Flutter, Node/TypeScript, Python, Go, Rust, C++, C# Game Engine**).
 
 ---
 
-## 📌 Propósito y Alcance
+## 📌 Propósito y Alcance Transversal
 
-`infra-agent-skill` dota a los agentes de IA de capacidades avanzadas para auditar, diseñar, optimizar y automatizar la infraestructura del proyecto:
+`infra-agent-skill` provee a los agentes de IA un núcleo de ingeniería de infraestructura desacoplado del dominio de aplicación:
 
-1. **📦 Containerización**: Docker multi-stage builds optimizados por capa, reduciendo tamaño final de imagen y maximizando caché de dependencias.
-2. **🔄 Pipelines CI/CD**: Automatización con GitHub Actions / GitLab CI para validación de sintaxis, pruebas unitarias, build de binarios/contenedores y despliegue continuo.
-3. **🌐 Infraestructura como Código (IaC)**: Módulos idempotentes de Terraform / Ansible para provisionamiento en la nube (GCP, AWS, Azure, DigitalOcean, VPS).
-4. **🚀 Estrategias de Despliegue**: Rollout progresivo, Blue/Green, Canary, estrategias de rollback automático y monitoreo post-deploy.
-5. **🛡️ Gestión de Secretos e Infraestructura Segura**: Aislamiento de variables de entorno, rotación de credenciales y hardening de entornos.
+1. **🛡️ Aislamiento de Frontera Transversal (Domain Shield)**:
+   - La infraestructura **no audita ni acopla** layouts, widgets de UI, insets de SO (ej. Android 15 Edge-to-Edge, SafeAreas) ni lógica de negocio. Esas validaciones pertenecen a las habilidades de plataforma.
+   - La infraestructura **define y exige el contrato de compuertas pre-flight** (`lint`, `test`, `security`). Si la plataforma reporta fallos, el pipeline detiene el release.
+2. **🔒 Release Hardening & Optimización Obligatoria**:
+   - Auditoría estricta pre-compilación: bloqueo de distribución a producción si las banderas de optimización (minificación, dead code elimination, tree-shaking, stripping) están desactivadas.
+   - Gestión y archivo de símbolos de depuración (mapping.txt, dSYMs, sourcemaps) para observabilidad de crashes sin exponerlos en artefactos públicos.
+   - Verificación de contratos de preservación (keep rules / reflexión) para evitar roturas en runtime por ofuscación.
+3. **📦 Empaquetado Multiarquetipo**:
+   - **Servicios / APIs**: Docker multi-stage optimizado por capas y usuarios no-root.
+   - **Clientes / Mobile / Games**: Runners reproducibles, inyección segura de llaves y bundles de distribución.
+   - **CLIs / Librerías**: Binarios estáticos con stripping o paquetes limpios sin dependencias de desarrollo.
+   - **Web Estática / CDN**: Inmutabilidad y content-hashing para cache-busting.
+4. **🔄 Pipelines CI/CD & Secretos**:
+   - Automatización en GitHub Actions, GitLab CI, etc., con aislamiento de variables y credenciales.
+5. **🚀 Despliegue Seguro & Verificación Post-Flight por Arquetipo**:
+   - Rollout progresivo (Canary, Blue/Green, Staged Rollout en tiendas).
+   - Verificación adaptada: HTTP `/health` para APIs, telemetría y tasa de crashes para clientes/mobile, smoke-tests para CLIs.
 
 ---
 
@@ -22,25 +34,33 @@ Designed to be **100% agnostic** across all application types (**Flutter, Web, G
 
 | Comando | Acción | Descripción |
 |---|---|---|
-| `$infra` | **Bootstrap Infra** | Carga el contexto de infraestructura y analiza la postura actual del proyecto. |
-| `$infra:check` | **Diagnóstico** | Ejecuta scripts de salud, auditando Dockerfiles, pipelines y archivos de IaC. |
-| `$infra:docker` | **Containerizar** | Genera o refactoriza Dockerfiles multi-stage optimizados para la plataforma activa. |
-| `$infra:cicd` | **Pipeline CI/CD** | Construye o mejora workflows de CI/CD con pruebas, linting y artifact packaging. |
-| `$infra:iac` | **Provisionamiento** | Crea/actualiza manifiestos Terraform/Ansible con estado remoto seguro. |
+| `$infra` | **Bootstrap Infra** | Inicializa el contexto de infraestructura y valida la postura transversal del proyecto. |
+| `$infra:check` / `$infra:audit` | **Diagnóstico Integral** | Audita compuertas CI/CD, release hardening, empaquetado, secretos e IaC. |
+| `$infra:hardening` | **Release Hardening** | Verifica flags de optimización, minificación y archivo de símbolos de depuración. |
+| `$infra:cicd [target]` | **Pipeline CI/CD** | Construye o refactoriza workflows con contratos de compuertas pre-flight agnósticas. |
+| `$infra:docker [target]` | **Containerización** | Genera o refactoriza Dockerfiles multi-stage optimizados para servicios. |
+| `$infra:iac` | **Provisionamiento** | Crea/actualiza manifiestos Terraform/Ansible con estado remoto seguro y locking. |
 | `$infra:deploy` | **Plan de Despliegue** | Diseña e inspecciona la estrategia de despliegue con checklist pre y post-flight. |
 
 ---
 
-## 🧩 Arquitectura Transversal
+## 🧩 Arquitectura Transversal y Delimitación
 
 ```mermaid
 graph TD
-    A[Código Fuente: Flutter / Web / Backend / Game] --> B[Pipeline CI/CD: Linting & Test Matrix]
-    B --> C[Artefactos & Multi-stage Docker Build]
-    C --> D[Registry Seguro: Docker Hub / GHCR / ECR]
-    D --> E[Infraestructura IaC: Terraform / Ansible]
-    E --> F[Entorno Staging / Producción]
-    F --> G[Health-Check & Rollback Automático]
+    subgraph Dominio Aplicación / Plataforma [Flutter / Node / Go / Android]
+        A[Código Fuente & UI] --> B[Linter & Reglas de Plataforma]
+        B --> C[Contrato Pre-flight: verify / test]
+    end
+
+    subgraph Dominio Transversal [infra-agent-skill]
+        C --> D{Quality Gates en CI/CD}
+        D -->|Pass| E[Release Hardening: Minificación & Símbolos]
+        D -->|Fail| X[Abortar Pipeline]
+        E --> F[Empaquetado según Arquetipo: Container / AAB / Binary / CDN]
+        F --> G[Infraestructura IaC & Destino de Distribución]
+        G --> H[Verificación Post-Flight: Healthcheck / Telemetría]
+    end
 ```
 
 ---
@@ -57,10 +77,7 @@ git submodule add git@github.com:Agent-Rules-Ecosystem/infra-agent-skill.git .sk
 $boot
 ```
 
-**3. Ejecuta el primer comando de la skill**
+**3. Ejecuta el diagnóstico transversal**
 ```text
 $infra:audit
 ```
-
----
-
