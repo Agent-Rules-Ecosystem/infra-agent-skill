@@ -3,7 +3,7 @@
 ## Dockerfile Multi-Stage (Agnóstico)
 
 ```dockerfile
-FROM alpine:3.19 AS builder
+FROM alpine:3.21 AS builder
 WORKDIR /app
 # Pasos de compilación según la plataforma activa
 
@@ -18,7 +18,6 @@ CMD ["/app/server"]
 ## Docker Compose
 
 ```yaml
-version: '3.8'
 
 services:
   app:

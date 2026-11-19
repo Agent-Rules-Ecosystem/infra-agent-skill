@@ -71,7 +71,7 @@ COPY . .
 RUN <build-production-command>
 
 # Etapa 2: Runner Minimalista de Producción
-FROM alpine:3.19 OR distroless AS runner
+FROM alpine:3.21 OR distroless AS runner
 WORKDIR /app
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 COPY --from=builder /app/dist-or-binary /app/

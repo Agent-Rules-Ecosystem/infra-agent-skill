@@ -23,3 +23,7 @@ Un pipeline de CI/CD transversal y agnóstico debe estructurarse en 5 etapas sec
 - Usar caché de dependencias (npm/cargo/gradle/pub/pip) indexado por hash del lockfile.
 - Ejecutar jobs independientes en paralelo (ej. lint y security audit).
 - Runners efímeros y con permisos mínimos (`permissions: read-all`).
+
+## 3. Matriz de Build Móvil y Pipelines Minimalistas
+- **Build Móvil (`$infra:cicd flutter` / nativo)**: Auditar minificación R8/ProGuard en Android, gestión de firmas desde secretos de CI y generación de workflows en GitHub Actions.
+- **Firebase Hosting Minimalista**: En proyectos con `firebase.json` activo y sin requerimientos de contenedor, priorizar un pipeline minimalista sin `Dockerfile` usando directamente la CLI de Firebase como artefacto de deploy.

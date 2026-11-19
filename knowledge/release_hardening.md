@@ -45,3 +45,10 @@ Cuando se activa minificación/ofuscación, el compilador puede renombrar o elim
 - **Responsabilidad de la Infraestructura**:
   * Auditar que el compilador referencie el archivo de reglas de preservación.
   * Exigir que las pruebas de integración o smoke tests se ejecuten contra el binario **minificado/compilado en modo release**, no solo sobre el código en desarrollo.
+
+---
+
+## 4. 🚨 Cumplimiento de Guías de UI del SO al Actualizar Target APIs
+
+Al elevar la versión objetivo del sistema operativo (`targetSdk` en Android, `iOS deployment target` o equivalente), auditar obligatoriamente que la app y su capa nativa adopten los cambios de layout e insets exigidos por el SO:
+- **Android 15+ (`targetSdk 35+`)**: Verificar Edge-to-Edge (`enableEdgeToEdge()` en la actividad nativa y gestión de `SafeArea` / `WindowInsets` en la UI) para evitar superposiciones visuales con barras del sistema en producción.
